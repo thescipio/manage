@@ -22,14 +22,21 @@ function getIssues() {
         });
 }
 
+function formatDate(isoString) {
+    const date = new Date(isoString);
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+}
 
 function displayIssues(issues) {
     const tableBody = document.getElementById('content_body');
     tableBody.innerHTML = '';
 
     issues.forEach(post => {
-        if (post.status == "open") {
+        if (post.status === "open") {
             const card = document.createElement('div');
+            const formattedDate = formatDate(post.date);
+
             card.innerHTML = `
             <div class="issue-container flex items-center mt-6">
                 <div class="issue-content">
@@ -40,6 +47,9 @@ function displayIssues(issues) {
                         <span>${post.author_name}</span>
                         <span class="dot-separator"> • </span>
                         <span>${post.device}</span>
+                    </div>
+                    <div class="issue-details">
+                        <span class="text-sm">${formattedDate}</span>
                     </div>
                 </div>
                 <a href="" class="chevron-button ml-auto bg-pink-300 hover:bg-pink-500 text-black py-1 px-6 rounded-3xl" style="background-color: rgb(124, 66, 73); color: #fac5cc; text-decoration: none;">
@@ -55,7 +65,6 @@ function displayIssues(issues) {
         }
     });
 }
-
 
 function initialize() {
     getIssues();
