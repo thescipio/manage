@@ -9,12 +9,11 @@
     <link href="src/css/custom.css" rel="stylesheet">
 </head>
 <body>
-    <h1 class="header-text text-2xl font-semibold">New Issues | Halcyon</h1>
     <div class="container">
-        <div class="flex items-center mb-6">
-            <img src="https://avatars.githubusercontent.com/u/111476396?s=200&v=4" alt="User Icon" class="w-10 h-10 rounded-full mr-4">
-            <span class="text-lg">rrwwrr@gmail.com</span>
+        <div class="mb-8">
+            <h1 class="text-white text-4xl font-semibold">Report New issue</h1>
         </div>
+        
         <form>
             <div class="mb-4">
                 <input type="text" placeholder="Title" class="form-input">
@@ -32,14 +31,14 @@
                 </select>
             </div>
             <div class="mb-4">
-                <label for="message" class="block mb-2 text-sm font-medium text-white">Issue Detail</label>
+                <label for="message" class="block mb-2 text-sm font-medium text-white font-bold">Issue Detail</label>
                 <textarea id="message" rows="6" class="form-textarea block p-2.5 w-full text-sm bg-[#3c2e30] rounded-lg border border-[#645151] text-white focus:border-[#fab3bc]"></textarea>
             </div>
             <div class="mb-4">
                 <label for="attachments" class="block mb-2 text-sm font-medium text-white">Attachments</label>
                 <input type="file" id="attachments" name="attachments" class="form-input">
             </div>
-            <button type="submit" class="btn-custom bg-pink-300 text-gray-900 py-2 px-4 rounded float-right text-sm">Submit</button>
+            <button type="submit" class="py-1 px-6 rounded-xl float-right text-sm" style="background-color: rgb(124, 66, 73); color: #fac5cc;">Submit</button>
         </form>
     </div>
 </body>
