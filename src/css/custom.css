@@ -85,3 +85,17 @@ select {
         display: none;
     }
 }
+
+.material-icons {
+    font-size: 14px;
+}
+
+.issue-info {
+    display: flex;
+    align-items: center;
+}
+
+.issue-info .material-icons {
+    font-size: 14px;
+    margin-right: 4px;
+}
