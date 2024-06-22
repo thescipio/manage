@@ -63,3 +63,25 @@ select {
     outline: none; /* Menghilangkan outline default saat focus */
     background-color: #f898a3; /* Warna saat focus */
 }
+
+@media (max-width: 768px) {
+    .issue-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .issue-content {
+        width: 100%;
+    }
+    .issue-details {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .chevron-button {
+        margin-top: 10px;
+        align-self: flex-end;
+    }
+    .dot-separator {
+        display: none;
+    }
+}
