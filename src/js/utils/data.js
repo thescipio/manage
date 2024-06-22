@@ -18,7 +18,7 @@ export function displayIssues(datas) {
                     <div class="issue-details mt-2">
                         <span>${post.author_name}</span>
                         <span class="dot-separator"> • </span>
-                        <span>${post.device}</span>
+                        <span>${post.device_parsed}</span>
                     </div>
                     <div class="issue-details">
                         <span class="text-sm">${formattedDate}</span>
