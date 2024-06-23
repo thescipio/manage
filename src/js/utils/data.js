@@ -12,9 +12,11 @@ export function displayIssues(datas) {
             card.innerHTML = `
             <div class="issue-container flex items-center mt-6">
                 <div class="issue-content">
-                    <div class="mt-3 text-1xl text-white font-bold text-left">
-                    ${post.title}
-                    </div>
+                    <a href="post.html?id=${post.issue_id}">
+                        <div class="mt-3 text-1xl text-white font-bold text-left">
+                        ${post.title}
+                        </div>
+                    </a>
                     <div class="issue-details mt-2">
                         <span class="issue-info">
                             <span class="text-xs material-icons">face</span>
