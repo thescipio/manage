@@ -29,7 +29,7 @@ export function displayIssues(datas) {
                         <span class="text-sm">${formattedDate}</span>
                     </div>
                 </div>
-                <a href="" class="chevron-button ml-auto bg-pink-300 hover:bg-pink-500 text-black py-1 px-6 rounded-3xl" style="background-color: rgb(124, 66, 73); color: #fac5cc; text-decoration: none;">
+                <a href="post.html?id=${post.issue_id}" class="chevron-button ml-auto bg-pink-300 hover:bg-pink-500 text-black py-1 px-6 rounded-3xl" style="background-color: rgb(124, 66, 73); color: #fac5cc; text-decoration: none;">
                     ›
                 </a>
             </div>
@@ -41,4 +41,39 @@ export function displayIssues(datas) {
             tableBody.appendChild(card);
         }
     });
+}
+
+export function displayPost(data) {
+    const tableBody = document.getElementById('mainpost_body');
+    tableBody.innerHTML = '';
+
+    if (data.status === "open") {
+        const card = document.createElement('div');
+        const formattedDate = formatDate(data.date);
+
+        card.innerHTML = `
+        <div class="flex items-center mb-6">
+            <div>
+                <a href="../" class="text-4xl">‹</a>
+                <h1 class="text-white text-4xl font-semibold">${data.title}</h1>
+                <span class="issue-info">
+                    <span class="text-xs material-icons">face</span>
+                    ${data.author_name}
+                    <span class="text-lg">&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+                    <span class="text-xs material-icons">smartphone</span>
+                    ${data.device_parsed}
+                </span>
+                <span class="text-sm">${formattedDate}</span>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="text-white font-bold">Issue Details</h3>
+            <p>
+                ${data.description}
+            </p>
+        </div>
+        `;
+        tableBody.appendChild(card);
+    }
 }
