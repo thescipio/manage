@@ -18,30 +18,30 @@
         
         <form>
             <div class="mb-4">
-                <input type="text" placeholder="Title" class="form-input">
+                <input id="title" type="text" placeholder="Title" class="form-input">
             </div>
             <div class="flex mb-4">
-                <select class="form-select w-1/2 mr-2">
+                <select id="device" class="form-select w-1/2 mr-2">
                     <option value="" disabled selected>Device</option>
-                    <option value="device1">Device 1</option>
-                    <option value="device2">Device 2</option>
+                    <option value="lime">Redmi 9T</option>
+                    <option value="tulip">Redmi Note 6 Pro</option>
                 </select>
-                <select class="form-select w-1/2 ml-2">
+                <select id="version" class="form-select w-1/2 ml-2">
                     <option value="" disabled selected>Version</option>
-                    <option value="version1">Version 1</option>
-                    <option value="version2">Version 2</option>
+                    <option value="14.2">Ursinia 14.2</option>
                 </select>
             </div>
             <div class="mb-4">
-                <label for="message" class="block mb-2 text-sm font-medium text-white font-bold">Issue Detail</label>
-                <textarea id="message" rows="6" class="form-textarea block p-2.5 w-full text-sm bg-[#3c2e30] rounded-lg border border-[#645151] text-white focus:border-[#fab3bc]"></textarea>
+                <label for="description" class="block mb-2 text-sm font-medium text-white font-bold">Issue Detail</label>
+                <textarea id="description" rows="6" class="form-textarea block p-2.5 w-full text-sm bg-[#3c2e30] rounded-lg border border-[#645151] text-white focus:border-[#fab3bc]"></textarea>
             </div>
             <div class="mb-4">
-                <label for="message" class="block mb-2 text-sm font-medium text-white font-bold">Attachment Link</label>
-                <input type="text" placeholder="Link" class="form-input">
+                <label for="attachment_url" class="block mb-2 text-sm font-medium text-white font-bold">Attachment Link</label>
+                <input id="attachment_url" type="text" placeholder="Link" class="form-input">
             </div>
-            <button type="submit" class="py-1 px-6 rounded-xl float-right text-sm" style="background-color: rgb(124, 66, 73); color: #fac5cc;">Submit</button>
+            <button onclick="submitEvent()" type="submit" class="py-1 px-6 rounded-xl float-right text-sm" style="background-color: rgb(124, 66, 73); color: #fac5cc;">Submit</button>
         </form>
     </div>
+    <script src="src/js/controller/create.js" type="module"></script>
 </body>
 </html>
