@@ -1,5 +1,49 @@
-import { issueURL } from "../config/url.js";
+import { issueURL, deviceURL, versionURL } from "../config/url.js";
 import { token } from "../config/cookies.js";
+
+async function populateDeviceOptions() {
+    const deviceSelect = document.getElementById('device');
+
+    try {
+        const response = await fetch(deviceURL);
+        const result = await response.json();
+
+        if (result.data && Array.isArray(result.data)) {
+            result.data.forEach(device => {
+                const option = document.createElement('option');
+                option.value = device.codename;
+                option.textContent = device.marketname;
+                deviceSelect.appendChild(option);
+            });
+        } else {
+            console.error('Unexpected response format', result);
+        }
+    } catch (error) {
+        console.error('Error fetching device data:', error);
+    }
+}
+
+async function populateVersionOptions() {
+    const versionSelect = document.getElementById('version');
+
+    try {
+        const response = await fetch(versionURL);
+        const result = await response.json();
+
+        if (result.data && Array.isArray(result.data)) {
+            result.data.forEach(version => {
+                const option = document.createElement('option');
+                option.value = version.branch;
+                option.textContent = `${version.codename} ${version.branch}`;
+                versionSelect.appendChild(option);
+            });
+        } else {
+            console.error('Unexpected response format', result);
+        }
+    } catch (error) {
+        console.error('Error fetching version data:', error);
+    }
+}
 
 var currentURL = window.location.href;
 
@@ -92,4 +136,8 @@ async function submitEvent(event) {
 
 document.addEventListener('DOMContentLoaded', fetchIssueAndPopulateForm);
 
-document.querySelector('form').addEventListener('submit', submitEvent);
+document.addEventListener('DOMContentLoaded', () => {
+    populateDeviceOptions();
+    populateVersionOptions();
+    document.querySelector('form').addEventListener('submit', submitEvent);
+});
