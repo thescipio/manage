@@ -1,5 +1,6 @@
 import { issueURL } from "../config/url.js";
 import { displayPost } from "../utils/data.js";
+import { token } from "../config/cookies.js";
 
 var currentURL = window.location.href;
 
@@ -30,14 +31,48 @@ function getOnePost() {
         })
         .then(data => {
             displayPost(data.data);
+            setupEventListeners(); // Call setupEventListeners after displayPost
         })
         .catch(error => {
             console.error('Fetch Error:', error);
         });
 }
 
+function deletePost(postId) {
+    const requestOptions = {
+        method: 'DELETE',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        }
+    };
+
+    fetch(issueURL + "/post/" + postId, requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log('Post deleted successfully');
+            // Redirect to index.html if request is successful
+            window.location.href = 'index.html';
+        })
+        .catch(error => {
+            console.error('There was a problem deleting the post:', error);
+        });
+}
+
+
 function initialize() {
     getOnePost();
 }
 
+function setupEventListeners() {
+    // Add event listeners for buttons here
+    document.querySelectorAll('.delete-button').forEach(button => {
+        button.addEventListener('click', () => {
+            deletePost(idValue);
+        });
+    });
+}
+
 window.onload = initialize;
+

@@ -67,6 +67,15 @@ export function displayPost(data) {
                 </span>
                 <span class="text-sm">${formattedDate}</span>
             </div>
+            <div class="ml-auto py-1 px-6 rounded-3xl">
+                <button class="delete-button">
+                    <span class="text-xs material-icons">delete</span>
+                </button>
+                <span class="text-lg">&nbsp;&nbsp;</span>
+                <button onclick="editPost(${data.postid})">
+                    <span class="text-xs material-icons">edit</span>
+                </button>
+            </div>
         </div>
 
         <div>
