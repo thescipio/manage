@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halcyon • New Issues</title>
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/111476396?s=200&v=4" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="src/css/custom.css" rel="stylesheet">
+    <script src="src/js/guard.js" type="module"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="mb-8">
+            <a href="../" class="text-4xl">‹</a>
+            <h1 class="text-white text-4xl font-semibold">Report New issue</h1>
+        </div>
+        
+        <form>
+            <div class="mb-4">
+                <input id="title" type="text" placeholder="Title" class="form-input">
+            </div>
+            <div class="flex mb-4">
+                <select id="device" class="form-select w-1/2 mr-2">
+                    <option value="" disabled selected>Device</option>
+                    <option value="lime">Redmi 9T</option>
+                    <option value="tulip">Redmi Note 6 Pro</option>
+                </select>
+                <select id="version" class="form-select w-1/2 ml-2">
+                    <option value="" disabled selected>Version</option>
+                    <option value="14.2">Ursinia 14.2</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="description" class="block mb-2 text-sm font-medium text-white font-bold">Issue Detail</label>
+                <textarea id="description" rows="6" class="form-textarea block p-2.5 w-full text-sm bg-[#3c2e30] rounded-lg border border-[#645151] text-white focus:border-[#fab3bc]"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="attachment_url" class="block mb-2 text-sm font-medium text-white font-bold">Attachment Link</label>
+                <input id="attachment_url" type="text" placeholder="Link" class="form-input">
+            </div>
+            <button onclick="submitEvent()" type="submit" class="py-1 px-6 rounded-xl float-right text-sm" style="background-color: rgb(124, 66, 73); color: #fac5cc;">Submit</button>
+        </form>
+    </div>
+    <script src="src/js/controller/edit.js" type="module"></script>
+</body>
+</html>
