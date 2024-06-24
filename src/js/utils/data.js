@@ -1,4 +1,5 @@
 import { formatDate } from "./parse.js";
+import { getMyID } from "./myid.js";
 
 export function displayIssues(datas) {
     const tableBody = document.getElementById('content_body');
@@ -45,46 +46,62 @@ export function displayIssues(datas) {
     });
 }
 
-export function displayPost(data) {
+export async function displayPost(data) {
     const tableBody = document.getElementById('mainpost_body');
     tableBody.innerHTML = '';
 
-    if (data.status === "open") {
-        const card = document.createElement('div');
-        const formattedDate = formatDate(data.date);
+    try {
+        const myID = await getMyID(); // Fetch current user's ID
 
-        card.innerHTML = `
-        <div class="flex items-center mb-6">
+        if (data.status === "open") {
+            const card = document.createElement('div');
+            const formattedDate = formatDate(data.date);
+
+            card.innerHTML = `
+            <div class="flex items-center mb-6">
+                <div>
+                    <a href="../" class="text-4xl">‹</a>
+                    <h1 class="text-white text-4xl font-semibold">${data.title}</h1>
+                    <span class="issue-info">
+                        <span class="text-xs material-icons">face</span>
+                        ${data.author_name}
+                        <span class="text-lg">&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+                        <span class="text-xs material-icons">smartphone</span>
+                        ${data.device_parsed}
+                    </span>
+                    <span class="text-sm">${formattedDate}</span>
+                </div>
+                <div id="postctrls" class="ml-auto py-1 px-6 rounded-3xl">
+                    <button class="delete-button">
+                        <span class="text-xs material-icons">delete</span>
+                    </button>
+                    <span class="text-lg">&nbsp;&nbsp;</span>
+                    <button onclick="editPost(${data.postid})">
+                        <span class="text-xs material-icons">edit</span>
+                    </button>
+                </div>
+            </div>
+
             <div>
-                <a href="../" class="text-4xl">‹</a>
-                <h1 class="text-white text-4xl font-semibold">${data.title}</h1>
-                <span class="issue-info">
-                    <span class="text-xs material-icons">face</span>
-                    ${data.author_name}
-                    <span class="text-lg">&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-                    <span class="text-xs material-icons">smartphone</span>
-                    ${data.device_parsed}
-                </span>
-                <span class="text-sm">${formattedDate}</span>
+                <h3 class="text-white font-bold">Issue Details</h3>
+                <p>
+                    ${data.description}
+                </p>
             </div>
-            <div class="ml-auto py-1 px-6 rounded-3xl">
-                <button class="delete-button">
-                    <span class="text-xs material-icons">delete</span>
-                </button>
-                <span class="text-lg">&nbsp;&nbsp;</span>
-                <button onclick="editPost(${data.postid})">
-                    <span class="text-xs material-icons">edit</span>
-                </button>
-            </div>
-        </div>
+            `;
 
-        <div>
-            <h3 class="text-white font-bold">Issue Details</h3>
-            <p>
-                ${data.description}
-            </p>
-        </div>
-        `;
-        tableBody.appendChild(card);
+            // Check if data.userid matches current user's ID
+            if (data.user_id !== myID) {
+                // If not matching, hide the postctrls div
+                const postctrlsDiv = card.querySelector('#postctrls');
+                if (postctrlsDiv) {
+                    postctrlsDiv.style.display = 'none';
+                }
+            }
+
+            tableBody.appendChild(card);
+        }
+    } catch (error) {
+        console.error('Error displaying post:', error);
     }
 }
