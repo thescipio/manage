@@ -60,7 +60,7 @@ export async function displayPost(data) {
             card.innerHTML = `
             <div class="flex items-center mb-6">
                 <div>
-                    <a href="../" class="text-4xl">‹</a>
+                    <a onclick="window.history.back()" class="text-4xl">‹</a>
                     <h1 class="text-white text-4xl font-semibold">${data.title}</h1>
                     <span class="issue-info">
                         <span class="text-xs material-icons">face</span>
