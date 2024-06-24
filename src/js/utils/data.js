@@ -76,9 +76,9 @@ export async function displayPost(data) {
                         <span class="text-xs material-icons">delete</span>
                     </button>
                     <span class="text-lg">&nbsp;&nbsp;</span>
-                    <button onclick="editPost(${data.postid})">
+                    <a href="edit.html?id=${data.issue_id}">
                         <span class="text-xs material-icons">edit</span>
-                    </button>
+                    </a>
                 </div>
             </div>
 
