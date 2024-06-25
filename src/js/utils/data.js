@@ -1,5 +1,6 @@
 import { formatDate } from "./parse.js";
 import { getMyID } from "./myid.js";
+import { token } from "../config/cookies.js";
 
 export function displayIssues(datas) {
     const tableBody = document.getElementById('content_body');
@@ -58,7 +59,6 @@ export async function displayPost(data) {
         // Continue without myID
     }
 
-    if (data.status === "open") {
         const card = document.createElement('div');
         const formattedDate = formatDate(data.date);
 
@@ -100,7 +100,18 @@ export async function displayPost(data) {
         }
 
         tableBody.appendChild(card);
-    }
+
+        if (data.status == "closed") {
+            document.getElementById('commentbox').style.display = 'none';
+            document.getElementById('login2comment').style.display = 'none';
+        } else if (data.status == "open") {
+            if (token == "") {
+                document.getElementById('commentbox').style.display = 'none';
+            } else {
+                document.getElementById('login2comment').style.display = 'none';
+            }
+            document.getElementById('postclosed').style.display = 'none';
+        }
 }
 
 export function displayComments(datas) {
