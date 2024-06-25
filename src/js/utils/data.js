@@ -105,3 +105,37 @@ export async function displayPost(data) {
         tableBody.appendChild(card);
     }
 }
+
+export function displayComments(datas) {
+    const tableBody = document.getElementById('comment_body');
+    tableBody.innerHTML = '';
+
+    datas.forEach(post => {
+        if (post.status === "open") {
+            const card = document.createElement('div');
+            const formattedDate = formatDate(post.date);
+
+            card.innerHTML = `
+            <div class="my-5 px-4 py-4 rounded-xl" style="background-color: #31292a;">
+                <div>
+                    <h1 class="text-white font-bold">
+                        <span class="material-symbols-outlined justify-center align-middle items-center mr-1">
+                            chat_bubble
+                        </span>
+                        ${post.author_name}
+                    </h1>
+                    <p>
+                        ${post.description}
+                    </p>
+                    <span class="text-xs font-normal">${formattedDate}</span>
+                </div>
+            </div>
+
+            <div class="flex items-center mt-4">
+                <div class="w-full" style="height: 2px; background-color: #514245;"></div>
+            </div>
+            `;
+            tableBody.appendChild(card);
+        }
+    });
+}

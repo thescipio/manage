@@ -1,5 +1,5 @@
-import { issueURL } from "../config/url.js";
-import { displayPost } from "../utils/data.js";
+import { issueURL, commentURL } from "../config/url.js";
+import { displayPost, displayComments } from "../utils/data.js";
 import { token } from "../config/cookies.js";
 
 var currentURL = window.location.href;
@@ -61,6 +61,28 @@ function deletePost(postId) {
 }
 
 
+function getComments() {
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+    };
+
+    fetch(commentURL + "/" + idValue, requestOptions)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Something went wrong!');
+            }
+        })
+        .then(data => {
+            displayComments(data.data);
+        })
+        .catch(error => {
+            console.error('Fetch Error:', error);
+        });
+}
+
 function initialize() {
     if (token == "") {
         document.getElementById('commentbox').style.display = 'none';
@@ -68,6 +90,7 @@ function initialize() {
         document.getElementById('login2comment').style.display = 'none';
     }
     getOnePost();
+    getComments()
 }
 
 function setupEventListeners() {
