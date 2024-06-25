@@ -1,3 +1,4 @@
+// post.js
 import { issueURL, commentURL } from "../config/url.js";
 import { displayPost, displayComments } from "../utils/data.js";
 import { token } from "../config/cookies.js";
@@ -60,7 +61,6 @@ function deletePost(postId) {
         });
 }
 
-
 function getComments() {
     var requestOptions = {
         method: 'GET',
@@ -83,6 +83,40 @@ function getComments() {
         });
 }
 
+async function submitComment() {  // Corrected function name
+    const description = document.getElementById('comment_box').value;
+
+    const userDetails = {
+        description: description,
+    };
+
+    try {
+        const response = await fetch(commentURL + "/" + idValue, {  // Use correct idValue
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userDetails),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            const status = response.status;
+            const message = errorData.message;
+            console.error('Cannot create event.');
+            console.error('Status:', status);
+            console.error('Error during event creation:', message);
+        } else {
+            const responseData = await response.json();
+            console.log('Event creation succeeded');
+            window.location.reload()
+        }
+    } catch (error) {
+        console.error('Error during event creation:', error.message);
+    }
+}
+
 function initialize() {
     if (token == "") {
         document.getElementById('commentbox').style.display = 'none';
@@ -90,7 +124,7 @@ function initialize() {
         document.getElementById('login2comment').style.display = 'none';
     }
     getOnePost();
-    getComments()
+    getComments();
 }
 
 function setupEventListeners() {
@@ -100,7 +134,13 @@ function setupEventListeners() {
             deletePost(idValue);
         });
     });
+
+    const submitCommentButton = document.getElementById('submit_comment_button');
+    if (submitCommentButton) {
+        submitCommentButton.addEventListener('click', submitComment);  // Add event listener for comment submission
+    } else {
+        console.error('Submit comment button not found');
+    }
 }
 
 window.onload = initialize;
-
