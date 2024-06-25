@@ -32,7 +32,7 @@ export function displayIssues(datas) {
                         <span class="text-sm">${formattedDate}</span>
                     </div>
                 </div>
-                <a href="post.html?id=${post.issue_id}" class="chevron-button ml-auto bg-pink-300 hover:bg-pink-500 text-black py-1 px-6 rounded-3xl" style="background-color: rgb(124, 66, 73); color: #fac5cc; text-decoration: none;">
+                <a href="post.html?id=${post.issue_id}" class="chevron-button ml-auto bg-pink-300 hover:bg-pink-500 text-black py-1 px-6 rounded-3xl" style="background-color: #660025; color: #ffd9de; text-decoration: none;">
                     ›
                 </a>
             </div>
