@@ -20,11 +20,11 @@ export function displayIssues(datas) {
                     </a>
                     <div class="issue-details mt-2">
                         <span class="issue-info">
-                            <span class="text-xs material-icons">face</span>
+                            <span class="text-xs material-symbols-outlined mr-2">face</span>
                             ${post.author_name}
                         </span>
                         <span class="issue-info">
-                            <span class="text-xs material-icons">smartphone</span>
+                            <span class="text-xs material-symbols-outlined mr-2">smartphone</span>
                             ${post.device_parsed}
                         </span>
                     </div>
@@ -63,21 +63,21 @@ export async function displayPost(data) {
                     <a onclick="window.history.back()" class="text-4xl">‹</a>
                     <h1 class="text-white text-4xl font-semibold">${data.title}</h1>
                     <span class="issue-info">
-                        <span class="text-xs material-icons">face</span>
+                        <span class="text-xs material-symbols-outlined">face</span>
                         ${data.author_name}
                         <span class="text-lg">&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-                        <span class="text-xs material-icons">smartphone</span>
+                        <span class="text-xs material-symbols-outlined">smartphone</span>
                         ${data.device_parsed}
                     </span>
                     <span class="text-sm">${formattedDate}</span>
                 </div>
                 <div id="postctrls" class="ml-auto py-1 px-6 rounded-3xl">
                     <button class="delete-button">
-                        <span class="text-xs material-icons">delete</span>
+                        <span class="text-xs material-symbols-outlined">delete</span>
                     </button>
                     <span class="text-lg">&nbsp;&nbsp;</span>
                     <a href="edit.html?id=${data.issue_id}">
-                        <span class="text-xs material-icons">edit</span>
+                        <span class="text-xs material-symbols-outlined">edit</span>
                     </a>
                 </div>
             </div>
