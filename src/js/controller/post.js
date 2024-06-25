@@ -87,7 +87,7 @@ function getComments() {
         });
 }
 
-async function submitComment() {  // Corrected function name
+async function submitComment() {
     const description = document.getElementById('comment_box').value;
 
     const userDetails = {
@@ -95,7 +95,7 @@ async function submitComment() {  // Corrected function name
     };
 
     try {
-        const response = await fetch(commentURL + "/" + idValue, {  // Use correct idValue
+        const response = await fetch(commentURL + "/" + idValue, {
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + token,
@@ -117,7 +117,7 @@ async function submitComment() {  // Corrected function name
             if (description == "/delete") {
                 window.location.href = 'index.html';
             } else {
-                window.location.reload()
+                window.location.reload();
             }
         }
     } catch (error) {
@@ -149,6 +149,14 @@ function setupEventListeners() {
     } else {
         console.error('Submit comment button not found');
     }
+
+    const commentBox = document.getElementById('comment_box');
+    commentBox.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            submitComment();
+        }
+    });
 }
 
 window.onload = initialize;
