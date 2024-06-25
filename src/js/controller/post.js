@@ -76,7 +76,11 @@ function getComments() {
             }
         })
         .then(data => {
-            displayComments(data.data);
+            if (data.data !== null) {
+                displayComments(data.data);
+            } else {
+                console.log('No comments to display.');
+            }
         })
         .catch(error => {
             console.error('Fetch Error:', error);
