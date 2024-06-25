@@ -50,58 +50,58 @@ export async function displayPost(data) {
     const tableBody = document.getElementById('mainpost_body');
     tableBody.innerHTML = '';
 
+    let myID = null;
     try {
-        const myID = await getMyID(); // Fetch current user's ID
-
-        if (data.status === "open") {
-            const card = document.createElement('div');
-            const formattedDate = formatDate(data.date);
-
-            card.innerHTML = `
-            <div class="flex items-center mb-6">
-                <div>
-                    <a onclick="window.history.back()" class="text-4xl">‹</a>
-                    <h1 class="text-white text-4xl font-semibold">${data.title}</h1>
-                    <span class="issue-info">
-                        <span class="text-xs material-symbols-outlined">face</span>
-                        ${data.author_name}
-                        <span class="text-lg">&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-                        <span class="text-xs material-symbols-outlined">smartphone</span>
-                        ${data.device_parsed}
-                    </span>
-                    <span class="text-sm">${formattedDate}</span>
-                </div>
-                <div id="postctrls" class="ml-auto py-1 px-6 rounded-3xl">
-                    <button class="delete-button">
-                        <span class="text-xs material-symbols-outlined">delete</span>
-                    </button>
-                    <span class="text-lg">&nbsp;&nbsp;</span>
-                    <a href="edit.html?id=${data.issue_id}">
-                        <span class="text-xs material-symbols-outlined">edit</span>
-                    </a>
-                </div>
-            </div>
-
-            <div>
-                <h3 class="text-white font-bold">Issue Details</h3>
-                <p>
-                    ${data.description}
-                </p>
-            </div>
-            `;
-
-            // Check if data.userid matches current user's ID
-            if (data.user_id !== myID) {
-                // If not matching, hide the postctrls div
-                const postctrlsDiv = card.querySelector('#postctrls');
-                if (postctrlsDiv) {
-                    postctrlsDiv.style.display = 'none';
-                }
-            }
-
-            tableBody.appendChild(card);
-        }
+        myID = await getMyID();
     } catch (error) {
-        console.error('Error displaying post:', error);
+        console.error('Error fetching my ID:', error);
+        // Continue without myID
+    }
+
+    if (data.status === "open") {
+        const card = document.createElement('div');
+        const formattedDate = formatDate(data.date);
+
+        card.innerHTML = `
+        <div class="flex items-center mb-6">
+            <div>
+                <a onclick="window.history.back()" class="text-4xl">‹</a>
+                <h1 class="text-white text-4xl font-semibold">${data.title}</h1>
+                <span class="issue-info">
+                    <span class="text-xs material-symbols-outlined">face</span>
+                    ${data.author_name}
+                    <span class="text-lg">&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+                    <span class="text-xs material-symbols-outlined">smartphone</span>
+                    ${data.device_parsed}
+                </span>
+                <span class="text-sm">${formattedDate}</span>
+            </div>
+            <div id="postctrls" class="ml-auto py-1 px-6 rounded-3xl">
+                <button class="delete-button">
+                    <span class="text-xs material-symbols-outlined">delete</span>
+                </button>
+                <span class="text-lg">&nbsp;&nbsp;</span>
+                <a href="edit.html?id=${data.issue_id}">
+                    <span class="text-xs material-symbols-outlined">edit</span>
+                </a>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="text-white font-bold">Issue Details</h3>
+            <p>
+                ${data.description}
+            </p>
+        </div>
+        `;
+
+        if (data.user_id !== myID) {
+            const postctrlsDiv = card.querySelector('#postctrls');
+            if (postctrlsDiv) {
+                postctrlsDiv.style.display = 'none';
+            }
+        }
+
+        tableBody.appendChild(card);
     }
 }

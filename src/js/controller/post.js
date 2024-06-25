@@ -62,6 +62,11 @@ function deletePost(postId) {
 
 
 function initialize() {
+    if (token == "") {
+        document.getElementById('commentbox').style.display = 'none';
+    } else {
+        document.getElementById('login2comment').style.display = 'none';
+    }
     getOnePost();
 }
 
