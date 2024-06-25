@@ -114,7 +114,11 @@ async function submitComment() {  // Corrected function name
         } else {
             const responseData = await response.json();
             console.log('Event creation succeeded');
-            window.location.reload()
+            if (description == "/delete") {
+                window.location.href = 'index.html';
+            } else {
+                window.location.reload()
+            }
         }
     } catch (error) {
         console.error('Error during event creation:', error.message);
