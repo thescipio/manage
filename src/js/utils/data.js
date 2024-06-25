@@ -77,9 +77,6 @@ export async function displayPost(data) {
                 <span class="text-sm">${formattedDate}</span>
             </div>
             <div id="postctrls" class="ml-auto py-1 px-6 rounded-3xl">
-                <button class="delete-button">
-                    <span class="text-xs material-symbols-outlined">delete</span>
-                </button>
                 <span class="text-lg">&nbsp;&nbsp;</span>
                 <a href="edit.html?id=${data.issue_id}">
                     <span class="text-xs material-symbols-outlined">edit</span>
