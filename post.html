@@ -10,7 +10,7 @@
     <link href="src/css/custom.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
+    <div class="container" hidden>
         <div id="mainpost_body">
             <!-- Main post content will be loaded here -->
         </div>
@@ -45,6 +45,13 @@
         </div>
         <div id="postclosed" class="my-12">
             <h2>This post had been closed.</h2>
+        </div>
+    </div>
+    <div id="spinner" class="flex items-center justify-center min-h-screen">
+        <div class="loader">
+            <svg class="circular">
+                <circle class="path" fill="none" r="20" cx="50" cy="50" stroke-width="3" stroke-miterlimit="10"/>
+            </svg>
         </div>
     </div>
     <script src="src/js/controller/post.js" type="module"></script>
