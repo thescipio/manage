@@ -7,43 +7,41 @@ export function displayIssues(datas) {
     tableBody.innerHTML = '';
 
     datas.forEach(post => {
-        if (post.status === "open") {
-            const card = document.createElement('div');
-            const formattedDate = formatDate(post.date);
+        const card = document.createElement('div');
+        const formattedDate = formatDate(post.date);
 
-            card.innerHTML = `
-            <div class="issue-container flex items-center mt-6">
-                <div class="issue-content">
-                    <a href="post.html?id=${post.issue_id}">
-                        <div class="mt-3 text-1xl text-white font-bold text-left">
-                        ${post.title}
-                        </div>
-                    </a>
-                    <div class="issue-details mt-2">
-                        <span class="issue-info">
-                            <span class="text-xs material-symbols-outlined mr-2">face</span>
-                            ${post.author_name}
-                        </span>
-                        <span class="issue-info">
-                            <span class="text-xs material-symbols-outlined mr-2">smartphone</span>
-                            ${post.device_parsed}
-                        </span>
+        card.innerHTML = `
+        <div class="issue-container flex items-center mt-6">
+            <div class="issue-content">
+                <a href="post.html?id=${post.issue_id}">
+                    <div class="mt-3 text-1xl text-white font-bold text-left">
+                    ${post.title}
                     </div>
-                    <div class="issue-details">
-                        <span class="text-sm">${formattedDate}</span>
-                    </div>
-                </div>
-                <a href="post.html?id=${post.issue_id}" class="chevron-button ml-auto bg-pink-300 hover:bg-pink-500 text-black py-1 px-6 rounded-3xl" style="background-color: #660025; color: #ffd9de; text-decoration: none;">
-                    ›
                 </a>
+                <div class="issue-details mt-2">
+                    <span class="issue-info">
+                        <span class="text-xs material-symbols-outlined mr-2">face</span>
+                        ${post.author_name}
+                    </span>
+                    <span class="issue-info">
+                        <span class="text-xs material-symbols-outlined mr-2">smartphone</span>
+                        ${post.device_parsed}
+                    </span>
+                </div>
+                <div class="issue-details">
+                    <span class="text-sm">${formattedDate}</span>
+                </div>
             </div>
+            <a href="post.html?id=${post.issue_id}" class="chevron-button ml-auto bg-pink-300 hover:bg-pink-500 text-black py-1 px-6 rounded-3xl" style="background-color: #660025; color: #ffd9de; text-decoration: none;">
+                ›
+            </a>
+        </div>
 
-            <div class="flex items-center mt-4">
-                <div class="w-full" style="height: 2px; background-color: #514245;"></div>
-            </div>
-            `;
-            tableBody.appendChild(card);
-        }
+        <div class="flex items-center mt-4">
+            <div class="w-full" style="height: 2px; background-color: #514245;"></div>
+        </div>
+        `;
+        tableBody.appendChild(card);
     });
 }
 

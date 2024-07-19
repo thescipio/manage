@@ -1,6 +1,8 @@
 import { issueURL } from "../config/url.js";
-import { formatDate } from "../utils/parse.js";
 import { displayIssues } from "../utils/data.js";
+import { getParameterByName } from "../utils/url_query.js";
+
+var statusQuery = getParameterByName('open');
 
 function getIssues() {
     var requestOptions = {
@@ -8,7 +10,15 @@ function getIssues() {
         redirect: 'follow'
     };
 
-    fetch(issueURL, requestOptions)
+    if (statusQuery === "false") {
+        var fetchURL = issueURL + "?open=false"
+    } else {
+        var fetchURL = issueURL + "?open=true"
+    }
+
+    console.log("API URL :" + fetchURL)
+    var status = getParameterByName('open');
+    fetch(fetchURL, requestOptions)
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -18,7 +28,6 @@ function getIssues() {
         })
         .then(data => {
             displayIssues(data.data);
-            // Fade out the spinner and unhide the container
             const spinner = document.getElementById('spinner');
             const container = document.querySelector('.container');
             spinner.classList.add('fade-out');
@@ -30,12 +39,10 @@ function getIssues() {
         })
         .catch(error => {
             console.error('Fetch Error:', error);
-            // Even in case of error, remove the spinner and show an error message if needed
             const spinner = document.getElementById('spinner');
             spinner.classList.add('fade-out');
             spinner.addEventListener('animationend', () => {
                 spinner.style.display = 'none';
-                // Show an error message in the container
                 const container = document.querySelector('.container');
                 container.removeAttribute('hidden');
                 container.innerHTML = '<p class="text-white">Failed to load issues. Please try again later.</p>';
