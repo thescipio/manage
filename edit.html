@@ -9,8 +9,8 @@
     <link href="src/css/custom.css" rel="stylesheet">
     <script src="src/js/guard.js" type="module"></script>
 </head>
-<body>
-    <div class="container">
+<body class="min-h-screen flex flex-col">
+    <div class="container flex-grow">
         <div class="mb-8">
             <a onclick="window.history.back()" class="text-4xl">‹</a>
             <h1 class="text-white text-4xl font-semibold">Report New issue</h1>
@@ -39,6 +39,13 @@
             <button onclick="submitEvent()" type="submit" class="py-1 px-6 rounded-xl float-right text-sm" style="background-color: #660025; color: #ffd9de;">Submit</button>
         </form>
     </div>
+
+    <footer class="mt-auto text-white mb-4">
+        <div class="text-center text-xs">
+            <span>© 2024 Halcyon Project.&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;<a href="https://hlcyn.co">Home</a>&nbsp;&nbsp;&nbsp;<a href="https://wiki.hlcyn.co">Wiki </a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/halcyonproject">GitHub</a></span>
+        </div>
+    </footer>
+
     <script src="src/js/controller/edit.js" type="module"></script>
 </body>
 </html>
