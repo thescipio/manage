@@ -134,7 +134,7 @@ async function submitComment() {
         } else {
             const responseData = await response.json();
             console.log('Event creation succeeded');
-            if (description == "/delete") {
+            if (description == "/close") {
                 window.location.href = 'index.html';
             } else {
                 window.location.reload();
