@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halcyon • New Issues</title>
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/111476396?s=200&v=4" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="../src/css/custom.css" rel="stylesheet">
+    <script src="../src/js/guard.js" type="module"></script>
+</head>
+<body class="min-h-screen flex flex-col">
+    <div class="container flex-grow">
+        <div class="mb-8">
+            <a onclick="window.history.back()" class="text-4xl">‹</a>
+            <h1 class="text-white text-4xl font-semibold">Edit new version</h1>
+        </div>
+        
+        <form>
+            <div class="mb-4">
+                <input id="codename" type="text" placeholder="Codename" class="form-input">
+            </div>
+            <div class="flex mb-4">
+                <input id="branch" type="text" placeholder="Branch name" class="form-input w-1/2 mr-2">
+                <input id="android_version" type="text" placeholder="Android Version" class="form-input w-1/2 mr-2">
+            </div>
+            <button onclick="submitEvent()" type="submit" class="py-1 px-6 rounded-xl float-right text-sm" style="background-color: #660025; color: #ffd9de; #fac5cc;">Submit</button>
+        </form>
+    </div>
+
+    <footer class="mt-auto text-white mb-4">
+        <div class="text-center text-xs">
+            <span>© 2024 Halcyon Project.&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;<a href="https://hlcyn.co">Home</a>&nbsp;&nbsp;&nbsp;<a href="https://wiki.hlcyn.co">Wiki </a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/halcyonproject">GitHub</a></span>
+        </div>
+    </footer>
+
+    <script src="../src/js/controller/ versions/edit.js" type="module"></script>
+</body>
+</html>

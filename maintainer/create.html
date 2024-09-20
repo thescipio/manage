@@ -7,35 +7,23 @@
     <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/111476396?s=200&v=4" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link href="src/css/custom.css" rel="stylesheet">
-    <script src="src/js/guard.js" type="module"></script>
+    <link href="../src/css/custom.css" rel="stylesheet">
+    <script src="../src/js/guard.js" type="module"></script>
 </head>
 <body class="min-h-screen flex flex-col">
     <div class="container flex-grow">
         <div class="mb-8">
             <a onclick="window.history.back()" class="text-4xl">‹</a>
-            <h1 class="text-white text-4xl font-semibold">Report New issue</h1>
+            <h1 class="text-white text-4xl font-semibold">Add new version</h1>
         </div>
         
         <form>
             <div class="mb-4">
-                <input id="title" type="text" placeholder="Title" class="form-input">
+                <input id="codename" type="text" placeholder="Codename" class="form-input">
             </div>
             <div class="flex mb-4">
-                <select id="device" class="form-select w-1/2 mr-2">
-                    <option value="" disabled selected>Device</option>
-                </select>
-                <select id="version" class="form-select w-1/2 ml-2">
-                    <option value="" disabled selected>Version</option>
-                </select>
-            </div>
-            <div class="mb-4">
-                <label for="description" class="block mb-2 text-sm font-medium text-white font-bold">Issue Detail</label>
-                <textarea id="description" rows="6" class="form-textarea block p-2.5 w-full text-sm bg-[#3c2e30] rounded-lg border border-[#645151] text-white focus:border-[#fab3bc]"></textarea>
-            </div>
-            <div class="mb-4">
-                <label for="attachment_url" class="block mb-2 text-sm font-medium text-white font-bold">Attachment Link</label>
-                <input id="attachment_url" type="text" placeholder="Link" class="form-input">
+                <input id="branch" type="text" placeholder="Branch name" class="form-input w-1/2 mr-2">
+                <input id="android_version" type="text" placeholder="Android Version" class="form-input w-1/2 mr-2">
             </div>
             <button onclick="submitEvent()" type="submit" class="py-1 px-6 rounded-xl float-right text-sm" style="background-color: #660025; color: #ffd9de; #fac5cc;">Submit</button>
         </form>
@@ -46,6 +34,6 @@
             <span>© 2024 Halcyon Project.&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;<a href="https://hlcyn.co">Home</a>&nbsp;&nbsp;&nbsp;<a href="https://wiki.hlcyn.co">Wiki </a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/halcyonproject">GitHub</a></span>
         </div>
     </footer>
-    <script src="src/js/controller/create.js" type="module"></script>
+    <script src="../src/js/controller/ versions/create.js" type="module"></script>
 </body>
 </html>
