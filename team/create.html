@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halcyon • New Issues</title>
+    <title>Halcyon • Add team member</title>
     <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/111476396?s=200&v=4" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -14,17 +14,38 @@
     <div class="container flex-grow">
         <div class="mb-8">
             <a onclick="window.history.back()" class="text-4xl">‹</a>
-            <h1 class="text-white text-4xl font-semibold">Add new version</h1>
+            <h1 class="text-white text-4xl font-semibold">Add team member</h1>
         </div>
         
         <form>
             <div class="mb-4">
-                <input id="codename" type="text" placeholder="Codename" class="form-input">
+                <select id="teleid" class="form-select">
+                    <option value="" disabled selected>Select Halcyon Account</option>
+                </select>
             </div>
+
+            <div class="mb-4">
+                <input id="name" type="text" placeholder="Name" class="form-input">
+            </div>
+
             <div class="flex mb-4">
-                <input id="branch" type="text" placeholder="Branch name" class="form-input w-1/2 mr-2">
-                <input id="android_version" type="text" placeholder="Android Version" class="form-input w-1/2 mr-2">
+                <input id="github" type="text" placeholder="GitHub" class="form-input w-1/2 mr-2">
+                <input id="gitlab" type="text" placeholder="GitLab" class="form-input w-1/2 mr-2">
             </div>
+
+            <div class="mb-4">
+                <input id="email" type="text" placeholder="E-Mail address" class="form-input">
+            </div>
+
+            <div class="mb-4">
+                <select id="role" class="form-select">
+                    <option value="" disabled selected>Select Role</option>
+                    <option value="core">Core Team</option>
+                    <option value="maintainer">Maintainer</option>
+                    <option value="contibutor">Contributor</option>
+                </select>
+            </div>
+
             <button onclick="submitEvent()" type="submit" class="py-1 px-6 rounded-xl float-right text-sm" style="background-color: #660025; color: #ffd9de; #fac5cc;">Submit</button>
         </form>
     </div>
@@ -34,6 +55,6 @@
             <span>© 2024 Halcyon Project.&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;<a href="https://hlcyn.co">Home</a>&nbsp;&nbsp;&nbsp;<a href="https://wiki.hlcyn.co">Wiki </a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/halcyonproject">GitHub</a></span>
         </div>
     </footer>
-    <script src="../src/js/controller/ versions/create.js" type="module"></script>
+    <script src="../src/js/controller/team/create.js" type="module"></script>
 </body>
 </html>
