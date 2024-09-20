@@ -83,10 +83,12 @@ export async function displayPost(data) {
         </div>
 
         <div>
-            <h3 class="text-white font-bold">Issue Details</h3>
-            <p>
-                ${data.description}
-            </p>
+            <h3 class="text-white font-bold py-1">Issue Details</h3>
+            <div class="body-card">
+                <p>
+                    ${data.description}
+                </p>
+            </div>
         </div>
         `;
 
