@@ -1,5 +1,5 @@
-import { issueURL, deviceURL, versionURL } from "../../config/url.js";
 import { token } from "../../config/cookies.js";
+import { isCoreUser } from "../../utils/myid.js";
 
 async function submitEvent(event) {
     event.preventDefault();
@@ -40,6 +40,30 @@ async function submitEvent(event) {
     }
 }
 
+async function checkAccess() {
+    try {
+        const isCore = await isCoreUser();
+
+        if (!isCore) {
+            window.location.replace("../../../unauthorized.html");
+        } else {
+            const spinner = document.getElementById('spinner');
+            const container = document.querySelector('.container');
+            
+            spinner.classList.add('fade-out');
+            spinner.addEventListener('animationend', () => {
+                spinner.style.display = 'none';
+                container.removeAttribute('hidden');
+                container.classList.add('fade-in');
+            });
+        }
+    } catch (error) {
+        console.error('Error checking access:', error);
+        window.location.replace("../../../unauthorized.html");
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    checkAccess();
     document.querySelector('form').addEventListener('submit', submitEvent);
 });

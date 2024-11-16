@@ -11,7 +11,7 @@
     <script src="../src/js/guard.js" type="module"></script>
 </head>
 <body class="min-h-screen flex flex-col">
-    <div class="container flex-grow">
+    <div class="container flex-grow" hidden>
         <div class="mb-8">
             <a onclick="window.history.back()" class="text-4xl">‹</a>
             <h1 class="text-white text-4xl font-semibold">Add new version</h1>
@@ -27,6 +27,14 @@
             </div>
             <button onclick="submitEvent()" type="submit" class="py-1 px-6 rounded-xl float-right text-sm" style="background-color: #660025; color: #ffd9de; #fac5cc;">Submit</button>
         </form>
+    </div>
+
+    <div id="spinner" class="flex items-center justify-center min-h-screen">
+        <div class="loader">
+            <svg class="circular">
+                <circle class="path" fill="none" r="20" cx="50" cy="50" stroke-width="3" stroke-miterlimit="10"/>
+            </svg>
+        </div>
     </div>
 
     <footer class="mt-auto text-white mb-4">
