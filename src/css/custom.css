@@ -66,7 +66,18 @@ select {
 
 .box {
     background-color: #4941423f; 
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
+
+.box:hover {
+    transform: scale(1.05);
+    background-color: #5a4c4d6f; 
+}
+
+.box:active {
+    transform: scale(1.1); 
+}
+
 
 .table-color {
     background-color: #57474a61; 
