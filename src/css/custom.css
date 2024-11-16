@@ -64,6 +64,10 @@ select {
     background-color: #f898a3; /* Warna saat focus */
 }
 
+.box {
+    background-color: #4941423f; 
+}
+
 @media (max-width: 768px) {
     .issue-container {
         flex-direction: column;
