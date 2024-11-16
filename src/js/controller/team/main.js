@@ -84,10 +84,11 @@ async function initialize() {
 
     const isCore = await isCoreUser();
 
-    if (!isCore) {
+    if (isCore) {
         const addButton = document.getElementById('addButton');
-        if (addButton) { // Ensure the element exists
-            addButton.style.display = 'none';
+        if (addButton) {
+            addButton.removeAttribute('hidden');
+            addButton.classList.add('fade-in');
         }
     }
 }

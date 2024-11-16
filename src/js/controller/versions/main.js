@@ -72,12 +72,12 @@ async function initialize() {
     await getTeams();
 
     const isCore = await isCoreUser();
-    console.log("This user is core? " + isCore);
 
-    if (!isCore) {
+    if (isCore) {
         const addButton = document.getElementById('addButton');
         if (addButton) {
-            addButton.style.display = 'none';
+            addButton.removeAttribute('hidden');
+            addButton.classList.add('fade-in');
         }
     }
 }
