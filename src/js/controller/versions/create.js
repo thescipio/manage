@@ -59,7 +59,7 @@ async function checkAccess() {
         }
     } catch (error) {
         console.error('Error checking access:', error);
-        window.location.replace("../../../unauthorized.html");
+        window.location.replace("../../unauthorized.html");
     }
 }
 

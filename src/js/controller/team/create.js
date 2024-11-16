@@ -83,7 +83,7 @@ async function checkAccess() {
         const isCore = await isCoreUser();
 
         if (!isCore) {
-            window.location.replace("../../../unauthorized.html");
+            window.location.replace("../../unauthorized.html");
         } else {
             const spinner = document.getElementById('spinner');
             const container = document.querySelector('.container');
@@ -97,7 +97,7 @@ async function checkAccess() {
         }
     } catch (error) {
         console.error('Error checking access:', error);
-        window.location.replace("../../../unauthorized.html");
+        window.location.replace("../../unauthorized.html");
     }
 }
 
