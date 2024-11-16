@@ -72,6 +72,12 @@ select {
     background-color: #57474a61; 
 }
 
+.table-color2 td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: none; 
+    border-right: none;
+}
+
 .table-text {
     background-color: #4941423f; 
 }
