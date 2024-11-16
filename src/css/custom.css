@@ -68,6 +68,14 @@ select {
     background-color: #4941423f; 
 }
 
+.table-color {
+    background-color: #57474a61; 
+}
+
+.table-text {
+    background-color: #4941423f; 
+}
+
 @media (max-width: 768px) {
     .issue-container {
         flex-direction: column;
