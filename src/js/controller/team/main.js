@@ -1,5 +1,6 @@
 import { maintainerURL } from "../../config/url.js";
 import { token } from "../../config/cookies.js";
+import { isCoreUser } from "../../utils/myid.js";
 
 function showTeams(datas) {
     const tableBody = document.getElementById('user-list');
@@ -50,7 +51,7 @@ function getTeams() {
             if (response.ok) {
                 return response.json();
             } else {
-                throw new Error('Something went wrong!');
+                throw new Error('Failed to fetch team data. Status: ' + response.status);
             }
         })
         .then(data => {
@@ -72,14 +73,23 @@ function getTeams() {
                 spinner.style.display = 'none';
                 const container = document.querySelector('.container');
                 container.removeAttribute('hidden');
-                container.innerHTML = '<p class="text-white">Failed to load issues. Please try again later.</p>';
+                container.innerHTML = '<p class="text-white">Failed to load team data. Please try again later.</p>';
                 container.classList.add('fade-in');
             });
         });
 }
 
-function initialize() {
-    getTeams();
+async function initialize() {
+    await getTeams();
+
+    const isCore = await isCoreUser();
+
+    if (!isCore) {
+        const addButton = document.getElementById('addButton');
+        if (addButton) { // Ensure the element exists
+            addButton.style.display = 'none';
+        }
+    }
 }
 
 window.onload = initialize;
