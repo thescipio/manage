@@ -1,5 +1,6 @@
 import { versionURL } from "../../config/url.js";
 import { token } from "../../config/cookies.js";
+import { isCoreUser } from "../../utils/myid.js";
 
 function showTeams(datas) {
     const tableBody = document.getElementById('version-list');
@@ -39,7 +40,7 @@ function getTeams() {
             if (response.ok) {
                 return response.json();
             } else {
-                throw new Error('Something went wrong!');
+                throw new Error(`Failed to fetch version data. Status: ${response.status}`);
             }
         })
         .then(data => {
@@ -61,14 +62,24 @@ function getTeams() {
                 spinner.style.display = 'none';
                 const container = document.querySelector('.container');
                 container.removeAttribute('hidden');
-                container.innerHTML = '<p class="text-white">Failed to load issues. Please try again later.</p>';
+                container.innerHTML = '<p class="text-white">Failed to load version data. Please try again later.</p>';
                 container.classList.add('fade-in');
             });
         });
 }
 
-function initialize() {
-    getTeams();
+async function initialize() {
+    await getTeams();
+
+    const isCore = await isCoreUser();
+    console.log("This user is core? " + isCore);
+
+    if (!isCore) {
+        const addButton = document.getElementById('addButton');
+        if (addButton) {
+            addButton.style.display = 'none';
+        }
+    }
 }
 
 window.onload = initialize;
