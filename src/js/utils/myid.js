@@ -11,7 +11,7 @@ export async function getMyID() { // Note the async keyword here
     };
 
     try {
-        const response = await fetch(myidURL, requestOptions); // await should be used within an async function
+        const response = await fetch(myidURL, requestOptions);
         if (!response.ok) {
             throw new Error('Something went wrong!');
         }
@@ -21,5 +21,28 @@ export async function getMyID() { // Note the async keyword here
     } catch (error) {
         console.error('Fetch Error:', error);
         throw error;
+    }
+}
+
+export async function isCoreUser() {
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        }
+    };
+    
+    try {
+        const response = await fetch(myidURL, requestOptions);
+        if (!response.ok) {
+            throw new Error(`API request failed with status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data.isCore === true;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        return false;
     }
 }
