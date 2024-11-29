@@ -1,4 +1,4 @@
-import { maintainerURL, accountURL } from "../../config/url.js";
+import { maintainerURL, applicantsURL } from "../../config/url.js";
 import { token } from "../../config/cookies.js";
 import { isCoreUser } from "../../utils/myid.js";
 
@@ -6,7 +6,7 @@ async function populateAccOptions() {
     const accountSelect = document.getElementById('teleid');
 
     try {
-        const response = await fetch(accountURL, {
+        const response = await fetch(applicantsURL, {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token,
@@ -17,12 +17,10 @@ async function populateAccOptions() {
 
         if (result.data && Array.isArray(result.data)) {
             result.data.forEach(account => {
-                if (account.role !== 'user') {
-                    const option = document.createElement('option');
-                    option.value = account.id;
-                    option.textContent = account.username;
-                    accountSelect.appendChild(option);
-                }
+                const option = document.createElement('option');
+                option.value = account.userid;
+                option.textContent = account.username;
+                accountSelect.appendChild(option);
             });
         } else {
             console.error('Unexpected response format', result);
