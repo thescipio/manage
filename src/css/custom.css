@@ -83,6 +83,26 @@ select {
     background-color: #57474a61; 
 }
 
+.action-color {
+    background-color: #3e3234; 
+}
+
+.action-color:hover {
+    background-color: #48393c; 
+}
+
+.alert-color {
+    background-color: #3e3234; 
+}
+
+.alert-delete {
+    background-color: #660025; 
+}
+
+.alert-delete:hover {
+    background-color: #72032c; 
+}
+
 .table-color2 td {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     border-left: none; 
