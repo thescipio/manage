@@ -28,14 +28,16 @@ function showTeams(datas) {
                 </button>
                <div class="dropdown-menu hidden z-10 absolute w-15 top-3 sm:top-2 transform translate-x-4 -left-24">
                 <ul class="py-2 text-sm text button-lock flex justify-between divide-x">
-                    <a href="edit-paid.html?airdropId=#EDIT#" class="w-full">
+                    <a href="edit.html?branch=${post.branch}" class="w-full">
                     <li class="flex items-center px-4 py-2 cursor-pointer w-full action-color ">
                         <i class="fa-solid fa-pen text-white"></i>
                     </li>
                     </a>
-                    <li id="deleteButton" class="flex items-center px-4 py-2 cursor-pointer w-full action-color " onclick="confirmDelete('#DELETE#')">
-                        <i class="fa-solid fa-trash text-white"></i> 
-                    </li>
+                    <!--
+                        <li id="deleteButton" class="flex items-center px-4 py-2 cursor-pointer w-full action-color " onclick="confirmDelete('${versionURL}', '${post.teleid}', '${token}')">
+                            <i class="fa-solid fa-trash text-white"></i> 
+                        </li>
+                    -->
                 </ul>
             </div>
         </td>
