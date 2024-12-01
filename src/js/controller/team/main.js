@@ -2,6 +2,9 @@ import { maintainerURL } from "../../config/url.js";
 import { token } from "../../config/cookies.js";
 import { isCoreUser } from "../../utils/myid.js";
 
+
+
+
 function showTeams(datas) {
     const tableBody = document.getElementById('user-list');
     tableBody.innerHTML = '';
@@ -44,7 +47,7 @@ function showTeams(datas) {
                         <i class="fa-solid fa-pen text-white"></i>
                     </li>
                     </a>
-                    <li id="deleteButton" class="flex items-center px-4 py-2 cursor-pointer w-full action-color " onclick="confirmDelete('#DELETE#')">
+                    <li id="deleteButton" class="flex items-center px-4 py-2 cursor-pointer w-full action-color " onclick="confirmDelete('${maintainerURL}', '${post.teleid}', '${token}')">
                         <i class="fa-solid fa-trash text-white"></i> 
                     </li>
                 </ul>
@@ -54,6 +57,7 @@ function showTeams(datas) {
         tableBody.appendChild(card);
     });
 }
+
 
 function getTeams() {
     var requestOptions = {
