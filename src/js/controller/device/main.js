@@ -1,105 +1,79 @@
-import { maintainerURL } from "../../config/url.js";
+import { deviceURL, maintainerURL, brandURL } from "../../config/url.js";
 import { token } from "../../config/cookies.js";
 import { isCoreUser } from "../../utils/myid.js";
 
-
-
-
-function showTeams(datas) {
-    const tableBody = document.getElementById('user-list');
+function showTeams(devices, maintainers, brands) {
+    const tableBody = document.getElementById('device-data');
     tableBody.innerHTML = '';
 
-    datas.forEach(post => {
+    devices.forEach(device => {
+        const maintainerNames = device.maintainer
+            .map(m => maintainers.find(maintainer => maintainer.teleid === m.userid)?.name)
+            .filter(name => name)
+            .join(', '); // Join multiple maintainers with a comma
+
+        const brandName = brands.find(brand => brand.brand_lower === device.brand_lower)?.brand || device.brand_lower;
+
         const card = document.createElement('tr');
         card.classList.add('border-b', 'table-text');
 
-        let role;
-        if (post.role === "core") {
-            role = "Core Developer";
-        } else if (post.role === "maintainer") {
-            role = "Device Maintainer";
-        } else if (post.role === "contributor") {
-            role = "Project Contributor";
-        } else {
-            role = "Unknown Role";
-        }
-
         card.innerHTML = `
         <td scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
-            ${post.name}
+            ${brandName}
         </td>
         <td class="px-6 py-4">
-            ${post.email}
+            ${device.marketname}
         </td>
         <td class="px-6 py-4">
-            ${role}
+            ${device.codename}
         </td>
-        <td class="px-4 py-4 text-sm whitespace-nowrap relative">
-                <button class="px-1 py-1 text duration-200 rounded-lg focus:outline-none dropdown-toggle" onclick="toggleDropdown(event)">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
-                    </svg>
-                </button>
-               <div class="dropdown-menu hidden z-10 absolute w-15 top-3 sm:top-2 transform translate-x-4 -left-24">
-                <ul class="py-2 text-sm text button-lock flex justify-between divide-x">
-                    <a href="edit-paid.html?airdropId=#EDIT#" class="w-full">
-                    <li class="flex items-center px-4 py-2 cursor-pointer w-full action-color ">
-                        <i class="fa-solid fa-pen text-white"></i>
-                    </li>
-                    </a>
-                    <li id="deleteButton" class="flex items-center px-4 py-2 cursor-pointer w-full action-color " onclick="confirmDelete('${maintainerURL}', '${post.teleid}', '${token}')">
-                        <i class="fa-solid fa-trash text-white"></i> 
-                    </li>
-                </ul>
-            </div>
+        <td class="px-6 py-4">
+            ${maintainerNames || 'Unknown'}
         </td>
         `;
         tableBody.appendChild(card);
     });
 }
 
+async function getTeams() {
+    const spinner = document.getElementById('spinner');
+    const container = document.querySelector('.container');
 
-function getTeams() {
-    var requestOptions = {
-        method: 'GET',
-        headers: {
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json',
-        },
-        redirect: 'follow'
-    };
+    try {
+        const [deviceResponse, maintainerResponse, brandResponse] = await Promise.all([
+            fetch(deviceURL, { headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' } }),
+            fetch(maintainerURL, { headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' } }),
+            fetch(brandURL, { headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' } }),
+        ]);
 
-    fetch(maintainerURL, requestOptions)
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Failed to fetch team data. Status: ' + response.status);
-            }
-        })
-        .then(data => {
-            showTeams(data.data);
-            const spinner = document.getElementById('spinner');
-            const container = document.querySelector('.container');
-            spinner.classList.add('fade-out');
-            spinner.addEventListener('animationend', () => {
-                spinner.style.display = 'none';
-                container.removeAttribute('hidden');
-                container.classList.add('fade-in');
-            });
-        })
-        .catch(error => {
-            console.error('Fetch Error:', error);
-            const spinner = document.getElementById('spinner');
-            spinner.classList.add('fade-out');
-            spinner.addEventListener('animationend', () => {
-                spinner.style.display = 'none';
-                const container = document.querySelector('.container');
-                container.removeAttribute('hidden');
-                container.innerHTML = '<p class="text-white">Failed to load team data. Please try again later.</p>';
-                container.classList.add('fade-in');
-            });
+        if (!deviceResponse.ok || !maintainerResponse.ok || !brandResponse.ok) {
+            throw new Error('Failed to fetch one or more data sources.');
+        }
+
+        const [deviceData, maintainerData, brandData] = await Promise.all([
+            deviceResponse.json(),
+            maintainerResponse.json(),
+            brandResponse.json(),
+        ]);
+
+        showTeams(deviceData.data, maintainerData.data, brandData.data);
+
+        spinner.classList.add('fade-out');
+        spinner.addEventListener('animationend', () => {
+            spinner.style.display = 'none';
+            container.removeAttribute('hidden');
+            container.classList.add('fade-in');
         });
+    } catch (error) {
+        console.error('Fetch Error:', error);
+        spinner.classList.add('fade-out');
+        spinner.addEventListener('animationend', () => {
+            spinner.style.display = 'none';
+            container.removeAttribute('hidden');
+            container.innerHTML = '<p class="text-white">Failed to load version data. Please try again later.</p>';
+            container.classList.add('fade-in');
+        });
+    }
 }
 
 async function initialize() {
@@ -115,7 +89,5 @@ async function initialize() {
         }
     }
 }
-
-
 
 window.onload = initialize;
